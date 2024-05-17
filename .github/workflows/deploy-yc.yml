@@ -1,0 +1,40 @@
+on:
+  push:
+    branches: [main]
+
+env:
+  USERAPI_IMAGE: ${{ env.REGISTRY }}/${{ github.actor }}/garnet-userapi:v0
+
+jobs:
+  update-yc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy COI VM
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v2
+        env:
+          # Images
+          USERAPI_IMAGE: ${{ env.USERAPI_IMAGE }}
+          # Yandex Cloud
+          YC_VM_SSH: ${{ secrets.YC_VM_SSH }}
+          YC_VM_USERNAME: ${{ secrets.YC_VM_USERNAME }}
+          # Services variables
+          GARNET_SECURITY_ENCRYPTION_KEY: $${{ secrets.GARNET_SECURITY_ENCRYPTION_KEY }}
+          GARNET_SECURITY_ENCRYPTION_IV: ${{ secrets.GARNET_SECURITY_ENCRYPTION_IV }}
+          GARNET_SECURITY_ENCRYPTION_TOKEN_SECRET: ${{ secrets.GARNET_SECURITY_ENCRYPTION_TOKEN_SECRET }}
+          GARNET_DATABASE_URL: ${{ secrets.GARNET_DATABASE_URL }}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          VM-name: ${{ secrets.YC_VM_NAME }}
+          vm-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+          vm-cores: 2
+          vm-platform-id: 'standard-v2'
+          vm-memory: 4Gb
+          vm-disk-size: 50Gb
+          vm-subnet-id: ${{ secrets.YC_SUBNET_ID }}
+          docker-compose-path: './docker-compose.yc.yaml'
+          user-data-path: './user-data.yaml'
