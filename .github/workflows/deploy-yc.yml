@@ -3,6 +3,7 @@ on:
     branches: [main]
 
 env:
+  REGISTRY: ghcr.io
   USERAPI_IMAGE: ${{ env.REGISTRY }}/${{ github.actor }}/garnet-userapi:v0
 
 jobs:
