@@ -35,6 +35,7 @@ jobs:
           vm-platform-id: 'standard-v2'
           vm-memory: 4Gb
           vm-disk-size: 50Gb
+          vm-core-fraction: 1001
           vm-subnet-id: ${{ secrets.YC_SUBNET_ID }}
           docker-compose-path: './docker-compose.yc.yaml'
           user-data-path: './user-data.yaml'
