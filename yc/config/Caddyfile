@@ -1,0 +1,3 @@
+api.{$SERVER_DOMAIN}/userapi {
+    reverse_proxy userapi:8080
+}

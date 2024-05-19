@@ -1,0 +1,22 @@
+x-base: &base
+  restart: unless-stopped
+
+services:
+  caddy:
+    image: caddy
+    container_name: caddy
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    volumes:
+      - ./config/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+  userapi:
+    image: ghcr.io/garnet-geo/garnet-userapi:main
+    container_name: userapi
+    env_file:
+      - .env
+    <<: *base

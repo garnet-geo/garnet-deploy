@@ -15,10 +15,9 @@ jobs:
           echo "${{ secrets.YC_VM_SSH }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.YC_VM_IP }} > ~/.ssh/known_hosts
 
-      - name: Copy docker-compose and script
+      - name: Copy docker-compose and configs
         run: |
-          scp ./docker-compose.yc.yaml scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}/${{ secrets.YC_VM_WORKDIR }}/docker-compose.yaml
-          scp ./scripts/yc-init.sh scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}/${{ secrets.YC_VM_WORKDIR }}/init.sh
+          scp -r ./yc/* scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}/${{ secrets.YC_VM_WORKDIR }}/.
 
       - name: Pull and restart
         run: |
