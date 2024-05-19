@@ -1,3 +1,5 @@
-api.{$SERVER_DOMAIN}/userapi {
-    reverse_proxy userapi:8080
+api.{$SERVER_DOMAIN} {
+    handle_path /userapi/* {
+        reverse_proxy userapi:8080
+    }
 }
