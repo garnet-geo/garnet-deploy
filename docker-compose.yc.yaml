@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   userapi:
-    image: ghcr.io/garnet-geo/garnet-userapi:v0
+    image: ghcr.io/garnet-geo/garnet-userapi:main
     restart: always
     ports:
       - 8080:8080
