@@ -25,4 +25,4 @@ jobs:
           ssh ${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }} \
           'export YC_VM_WORKDIR=${{ secrets.YC_VM_WORKDIR }} && ' \
           'export YC_SECRETS_ID=${{ secrets.YC_SECRETS_ID }} && ' \
-          'bash \$YC_VM_WORKDIR/init.sh'
+          'bash ${{ secrets.YC_VM_WORKDIR }}/init.sh'
