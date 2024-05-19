@@ -9,6 +9,8 @@ services:
       - '80:80'
       - '443:443'
       - '443:443/udp'
+    environment:
+      SERVER_DOMAIN: garnet-geo.org
     volumes:
       - ./config/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
