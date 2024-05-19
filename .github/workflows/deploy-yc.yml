@@ -17,8 +17,8 @@ jobs:
 
       - name: Copy docker-compose and script
         run: |
-          scp ./docker-compose.yc.yaml scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}${{ secrets.YC_VM_WORKDIR }}/docker-compose.yaml
-          scp ./scripts/yc-init.sh scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}${{ secrets.YC_VM_WORKDIR }}/init.sh
+          scp ./docker-compose.yc.yaml scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}/${{ secrets.YC_VM_WORKDIR }}/docker-compose.yaml
+          scp ./scripts/yc-init.sh scp://${{ secrets.YC_VM_USERNAME }}@${{ secrets.YC_VM_IP }}/${{ secrets.YC_VM_WORKDIR }}/init.sh
 
       - name: Pull and restart
         run: |
